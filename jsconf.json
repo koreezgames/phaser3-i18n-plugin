@@ -1,0 +1,16 @@
+{
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ],
+  "include": [
+    "src/*"
+  ],
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "es6"
+  },
+  "typingOptions": {
+    "enableAutoDiscovery": true
+  }
+}

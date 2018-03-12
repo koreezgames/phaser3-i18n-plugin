@@ -1,0 +1,17 @@
+language: node_js
+sudo: required
+before_install:
+- npm install -g npm
+- npm --version
+script:
+- npm run build
+node_js:
+- '8'
+deploy:
+  provider: npm
+  skip_cleanup: true
+  on:
+    tags: true
+  email: sargsyan.sargis.89@gmail.com
+  api_key:
+    secure: Vn83By0WtQ+ShTX6CGvTrXtRKf9LJtNsXABm5Lh+v5FxBz2mO91Py79mTrrlQBlVPh2tsHfhuMIxa2Lw4Z4C1mNeevUZl81Ktlwq71DD0FOKiqWS/ks7bvRFRah65AuYwcVnIbgaXc2Mf+O+vzhocan6LxGa96aQcAoDn0Nt+cbRT+obOedhOEDhCWBcgsZBz1caVF61oihYAJhBvdtpLeG2mpNygUmUPiqu3qg9UjP1V9u4ZfXQ+WHzqSoqPTU78jNVzhhNkse0ezj1JUV7/0OvOmM5gG011ybRJzZzCG51yMjbn7rdNnPSgs8wulz/k2lz40D/rTO0Xig0o5QloNXzfIUAiUR2LQatK3N5Fu9L/2tR7YggiDhrdODhaQhJwFy6VX5lBJZaNGZf/7nRQ7khgB6ATIaxwIlxPj8manFCi8tyS+ZugsS5QhP58z2BvrRiAcUDGo2YewFKXOvBiCMFeMm0p4oI6zkksQ/rVurCA9uxoASiHDYMtcZj/RzjbKQBEPGRLXm2oeOws+TlnUFjMA5wARpfaH8fGKZyXY2EWlrXBMWXi1Q/f7PDFMSp3mTSCua1glL42wv3NpQPM4t2tEaRg2DM+JgZeSmdC/nqlTC1FReOK3PBJMdVfB3VtlRZtB/FZka9bb2YhBgdnjXoiCyPEsCf6dx6r7Or2Ds=
