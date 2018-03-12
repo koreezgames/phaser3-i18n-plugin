@@ -17,19 +17,19 @@ Key features:
 
 #### **_Using script tag:_**
 
-[![](https://data.jsdelivr.com/v1/package/npm/@koreez/phaser3-i18n-plugin/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@koreez/phaser3-i18n-plugin/dist/phaseri18n.min.js)
+[![](https://data.jsdelivr.com/v1/package/npm/@koreez/phaser3-i18n/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@koreez/phaser3-i18n/dist/phaseri18n.min.js)
 
 ```html
-<script src="//cdn.jsdelivr.net/npm/@koreez/phaser3-i18n-plugin/dist/phaseri18n.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/@koreez/phaser3-i18n/dist/phaseri18n.min.js"></script>
 ```
 
 #### **_Using npm:_**
 
-[![npm](https://img.shields.io/npm/dt/@koreez/phaser3-i18n-plugin.svg)](https://www.npmjs.com/package/@koreez/phaser3-i18n-plugin)
+[![npm](https://img.shields.io/npm/dt/@koreez/phaser3-i18n.svg)](https://www.npmjs.com/package/@koreez/phaser3-i18n)
 
 ```shell
 $ npm i -g npm
-$ npm i --save  @koreez/phaser3-i18n-plugin
+$ npm i --save  @koreez/phaser3-i18n
 ```
 
 ## Usage
@@ -39,13 +39,13 @@ $ npm i --save  @koreez/phaser3-i18n-plugin
 ##### **_CommonJS_**
 
 ```javascript
-var I18nPlugin = require("@koreez/phaser3-i18n-plugin");
+var I18nPlugin = require("@koreez/phaser3-i18n");
 ```
 
 ##### **_ES2015_**
 
 ```javascript
-import I18nPlugin from "@koreez/phaser3-i18n-plugin";
+import I18nPlugin from "@koreez/phaser3-i18n";
 ```
 
 ### Load the plugin
