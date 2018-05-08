@@ -1,7 +1,6 @@
 const path = require('path')
 const merge = require('webpack-merge')
 const packagejson = require('../package.json')
-
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 
 const parts = require('./webpack.parts.config')
@@ -11,14 +10,10 @@ main = main.replace(/^.*[\\/]/, '')
 
 const libraryName = main.substring(0, main.lastIndexOf('.'))
 
-// Phaser webpack config
-const phaserModule = path.resolve('node_modules/phaser-ce/')
-
 const paths = {
   base: path.resolve('src'),
-  app: path.resolve('src/index.js'),
-  dist: path.resolve('dist'),
-  phaser: path.join(phaserModule, 'build/custom/phaser-arcade-physics.js'),
+  app: path.resolve('src/index.ts'),
+  dist: path.resolve('lib'),
 }
 
 const libConfig = merge([
@@ -29,81 +24,34 @@ const libConfig = merge([
       app: paths.app,
     },
     output: {
-      path: paths.dist,
+      library: libraryName,
+      filename: libraryName + '.js',
       libraryExport: 'default',
+      libraryTarget: 'umd',
+      umdNamedDefine: true,
+      path: paths.dist,
+    },
+    externals: {
+      phaser: 'Phaser',
     },
     resolve: {
-      alias: {
-        phaser: paths.phaser,
-      },
       modules: [path.resolve('./node_modules'), path.resolve('./src')],
-      extensions: ['.json', '.js'],
+      extensions: ['.json', '.js', '.ts'],
     },
     plugins: [new CaseSensitivePathsPlugin()],
   },
 
-  parts.loadJs({
-    babelOptions: {
-      presets: [
-        [
-          'babel-preset-env',
-          {
-            modules: false,
-            useBuiltIns: 'entry',
-            shippedProposals: true,
-          },
-        ],
-        'stage-2',
-      ],
-      plugins: [],
-    },
-  }),
+  parts.loadJs({}),
 
   parts.sourceMaps('source-map'),
 
   parts.cleanup([paths.dist]),
 
-  parts.minifyJavaScript(),
-
-  parts.scopeHoisting(),
-
-  // parts.attachRevision(),
-])
-
-const varConfig = merge([
-  {
-    output: {
-      filename: 'phaseri18n.min.js',
-      library: 'I18nPlugin',
-      libraryTarget: 'var',
-      umdNamedDefine: false,
-    },
-    externals: {
-      phaser: 'Phaser',
-    },
-  },
-])
-
-const umdConfig = merge([
-  {
-    output: {
-      library: libraryName,
-      filename: libraryName + '.js',
-      libraryTarget: 'umd',
-      umdNamedDefine: true,
-    },
-    externals: {
-      phaser: {
-        commonjs: 'phaser',
-        commonjs2: 'phaser',
-        amd: 'phaser',
-        root: 'phaser',
-      },
-    },
-  },
+  parts.attachRevision(),
 ])
 
 module.exports = env => {
-  const config = merge(libConfig, env === 'var' ? varConfig : umdConfig)
+  const config = merge(libConfig)
+
   return config
 }
