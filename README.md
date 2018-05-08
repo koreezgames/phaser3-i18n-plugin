@@ -17,10 +17,10 @@ Key features:
 
 #### **_Using script tag:_**
 
-[![](https://data.jsdelivr.com/v1/package/npm/@koreez/phaser3-i18n/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@koreez/phaser3-i18n/dist/phaseri18n.min.js)
+[![](https://data.jsdelivr.com/v1/package/npm/@koreez/phaser3-i18n/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@koreez/phaser3-i18n/lib/index.js)
 
 ```html
-<script src="//cdn.jsdelivr.net/npm/@koreez/phaser3-i18n/dist/phaseri18n.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/@koreez/phaser3-i18n/lib/index.js"></script>
 ```
 
 #### **_Using npm:_**
@@ -39,13 +39,13 @@ $ npm i --save  @koreez/phaser3-i18n
 ##### **_CommonJS_**
 
 ```javascript
-var I18nPlugin = require("@koreez/phaser3-i18n");
+var I18nPlugin = require('@koreez/phaser3-i18n');
 ```
 
 ##### **_ES2015_**
 
 ```javascript
-import I18nPlugin from "@koreez/phaser3-i18n";
+import I18nPlugin from '@koreez/phaser3-i18n';
 ```
 
 ### Load the plugin
@@ -99,10 +99,10 @@ this.add.bitmapText(x, y, font, text, size, interpolations);
 var config = {
   x: 100,
   y: 100,
-  text: "translationKey",
-  font: "atari-classic",
+  text: 'translationKey',
+  font: 'atari-classic',
   size: 64,
-  interpolations: { 0: "value0", 1: "value1" },
+  interpolations: { 0: 'value0', 1: 'value1' },
 };
 this.make.dynamicBitmapText(config);
 ```
