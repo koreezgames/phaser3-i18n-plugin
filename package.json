@@ -1,6 +1,6 @@
 {
   "name": "@koreez/phaser3-i18n",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0",
   "description": "Phaser3 i18n",
   "main": "lib/index.js",
   "scripts": {
