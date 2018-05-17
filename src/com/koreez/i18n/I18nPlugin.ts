@@ -2,11 +2,10 @@ import i18next, { i18n } from 'i18next';
 import XHR from 'i18next-xhr-backend';
 import i18nText from './i18nText';
 
-export default class I18nPlugin {
+export default class I18nPlugin extends Phaser.Plugins.ScenePlugin {
   public static i18next: i18n;
-  public static register(PluginManager: any): void {
-    PluginManager.register('I18nPlugin', I18nPlugin, 'i18n');
 
+  public static staticConstructor(): any {
     I18nPlugin.i18next = i18next;
 
     i18nText.extendText();
@@ -16,20 +15,7 @@ export default class I18nPlugin {
     i18nText.extendDynamicBitmapText();
   }
 
-  private scene: Phaser.Scene;
-  private systems: Phaser.Scenes.Systems;
-  private languageChangedBinded: any;
-
-  constructor(scene: Phaser.Scene) {
-    //  The Scene that owns this plugin
-    this.scene = scene;
-
-    this.systems = scene.sys;
-
-    if (!scene.sys.settings.isBooted) {
-      scene.sys.events.once('boot', this.boot, this);
-    }
-  }
+  private languageChangedBound: any;
 
   //  Called when the Plugin is booted by the PluginManager.
   //  If you need to reference other systems in the Scene (like the Loader or DisplayList) then set-up those references now, not in the constructor.
@@ -41,22 +27,8 @@ export default class I18nPlugin {
 
     eventEmitter.on('shutdown', this.shutdown, this);
     eventEmitter.on('destroy', this.destroy, this);
-    this.languageChangedBinded = this.languageChanged.bind(this);
-    this.on('languageChanged', this.languageChangedBinded);
-  }
-
-  //  Called when a Scene shuts down, it may then come back again later (which will invoke the 'start' event) but should be considered dormant.
-  public shutdown(): void {
-    this.off('languageChanged', this.languageChangedBinded);
-    const eventEmitter: Phaser.Events.EventEmitter = this.systems.events;
-    eventEmitter.off('shutdown', this.shutdown, this, false);
-    eventEmitter.off('destroy', this.destroy, this, false);
-  }
-
-  //  Called when a Scene is destroyed by the Scene Manager. There is no coming back from a destroyed Scene, so clear up all resources here.
-  public destroy(): void {
-    this.shutdown();
-    this.scene = null;
+    this.languageChangedBound = this.languageChanged.bind(this);
+    this.on('languageChanged', this.languageChangedBound);
   }
 
   /**
@@ -304,7 +276,21 @@ export default class I18nPlugin {
     }
   }
 
+  private shutdown(): void {
+    this.off('languageChanged', this.languageChangedBound);
+    const eventEmitter: Phaser.Events.EventEmitter = this.systems.events;
+    eventEmitter.off('shutdown', this.shutdown, this, false);
+    eventEmitter.off('destroy', this.destroy, this, false);
+  }
+
+  private destroy(): void {
+    this.shutdown();
+    this.scene = null;
+  }
+
   private languageChanged(): void {
     this.recursiveUpdateText(this.scene);
   }
 }
+
+I18nPlugin.staticConstructor();

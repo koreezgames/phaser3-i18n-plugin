@@ -61,10 +61,10 @@ const clearTranslationParamameter: (key: string) => void = function(
   this.i18nUpdate();
 };
 
-const commonExtend: (clazz: any, prop: string) => void = function(
+const commonExtend: (clazz: any, prop: string) => void = (
   clazz: any,
   prop: string,
-): void {
+): void => {
   const creator: any = Phaser.GameObjects.GameObjectCreator;
 
   Object.defineProperty(clazz.prototype, 'text', text);
@@ -87,7 +87,7 @@ const commonExtend: (clazz: any, prop: string) => void = function(
   creator.register(`_${prop}`, textFactory);
 
   // Code taken from Phaser's Group
-  creator.register(prop, (config: any) => {
+  creator.register(prop, function(config: any): Phaser.GameObjects.GameObject {
     const _text: Phaser.GameObjects.GameObject = this.scene.make[`_${prop}`](
       config,
     );
@@ -96,43 +96,41 @@ const commonExtend: (clazz: any, prop: string) => void = function(
   });
 };
 
-const i18n: any = {
+const i18nText: any = {
   extendText: () => {
     commonExtend(Phaser.GameObjects.Text, 'text');
 
-    (Phaser.GameObjects.GameObjectFactory as any).register(
-      'text',
-      (
-        _x: any,
-        _y: any,
-        _text: any,
-        _style: any,
-        _interpolations: any,
-      ): Phaser.GameObjects.GameObject => {
-        const aText: Phaser.GameObjects.GameObject = this.scene.add._text(
-          _x,
-          _y,
-          _text,
-          _style,
-        );
-        (aText as any).interpolations = _interpolations;
-        return aText;
-      },
-    );
+    (Phaser.GameObjects.GameObjectFactory as any).register('text', function(
+      _x: any,
+      _y: any,
+      _text: any,
+      _style: any,
+      _interpolations: any,
+    ): Phaser.GameObjects.GameObject {
+      const aText: Phaser.GameObjects.GameObject = this.scene.add._text(
+        _x,
+        _y,
+        _text,
+        _style,
+      );
+      (aText as any).interpolations = _interpolations;
+      return aText;
+    });
   },
+
   extendBitmapText: () => {
     commonExtend(Phaser.GameObjects.BitmapText, 'bitmapText');
 
     (Phaser.GameObjects.GameObjectFactory as any).register(
       'bitmapText',
-      (
+      function(
         _x: any,
         _y: any,
         _font: any,
         _text: any,
         _size: any,
         _interpolations: any,
-      ): Phaser.GameObjects.GameObject => {
+      ): Phaser.GameObjects.GameObject {
         const aText: Phaser.GameObjects.GameObject = this.scene.add._bitmapText(
           _x,
           _y,
@@ -145,19 +143,20 @@ const i18n: any = {
       },
     );
   },
+
   extendDynamicBitmapText: () => {
     commonExtend(Phaser.GameObjects.DynamicBitmapText, 'dynamicBitmapText');
 
     (Phaser.GameObjects.GameObjectFactory as any).register(
       'dynamicBitmapText',
-      (
+      function(
         _x: any,
         _y: any,
         _font: any,
         _text: any,
         _size: any,
         _interpolations: any,
-      ): Phaser.GameObjects.GameObject => {
+      ): Phaser.GameObjects.GameObject {
         const aText: Phaser.GameObjects.GameObject = this.scene.add._dynamicBitmapText(
           _x,
           _y,
@@ -172,4 +171,4 @@ const i18n: any = {
   },
 };
 
-export default i18n;
+export default i18nText;
