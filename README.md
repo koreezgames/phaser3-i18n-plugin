@@ -51,12 +51,27 @@ import I18nPlugin from '@koreez/phaser3-i18n';
 ### Load the plugin
 
 You need to load the plugin in your game. This is done just like any other plugin in Phaser 3.
-So, to load the plugin, include it one of the Phaser Scenes _preload_ method.
+So, to load the plugin, include it in plugins config.
 
 ```javascript
-preload () {
-  this.load.plugin('I18nPlugin', I18nPlugin)
-}
+const config = {
+  type: Phaser.AUTO,
+  parent: 'phaser-example',
+  width: 800,
+  height: 600,
+  plugins: {
+    scene: [
+      {
+        key: 'i18nPlugin',
+        plugin: I18nPlugin,
+        mapping: 'i18n',
+      },
+    ],
+  },
+  scene: {
+    create: create,
+  },
+};
 ```
 
 ### Initialize the plugin
@@ -65,8 +80,7 @@ Afther plugin has beeen loaded you need to initialize it.
 
 ```javascript
 create () {
-  this.sys.install('I18nPlugin')
-  this.sys.i18n.init(
+  this.i18n.init(
     {
       fallbackLng: 'en',
       loadPath: 'assets/i18n/{{lng}}/{{ns}}.json',
