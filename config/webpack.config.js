@@ -32,7 +32,7 @@ const libConfig = merge([
       path: paths.dist,
     },
     externals: {
-      phaser: 'Phaser',
+      phaser: 'phaser',
     },
     resolve: {
       modules: [path.resolve('./node_modules'), path.resolve('./src')],

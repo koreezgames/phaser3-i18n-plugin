@@ -1,8 +1,10 @@
 import i18next, { i18n } from 'i18next';
 import XHR from 'i18next-xhr-backend';
+import I18n from './i18n';
 import i18nText from './i18nText';
 
-export default class I18nPlugin extends Phaser.Plugins.ScenePlugin {
+export default class I18nPlugin extends Phaser.Plugins.ScenePlugin
+  implements I18n {
   public static i18next: i18n;
 
   public static staticConstructor(): any {
@@ -26,7 +28,7 @@ export default class I18nPlugin extends Phaser.Plugins.ScenePlugin {
     //  If you don't need any of these events then remove the listeners and the relevant methods too.
 
     eventEmitter.on('shutdown', this.shutdown, this);
-    eventEmitter.on('destroy', this.destroy, this);
+    eventEmitter.on('shutdown', this.shutdown, this);
     this.languageChangedBound = this.languageChanged.bind(this);
     this.on('languageChanged', this.languageChangedBound);
   }
@@ -35,7 +37,7 @@ export default class I18nPlugin extends Phaser.Plugins.ScenePlugin {
    * @param options - Initial options.
    * @param callback - will be called after all translations were loaded or with an error when failed (in case of using a backend).
    */
-  public init(options: any, callback?: i18next.Callback): void {
+  public initialize(options: any, callback?: i18next.Callback): void {
     i18next.use(new XHR(null, options));
     if (options) {
       i18next.init(options, callback);
@@ -280,11 +282,7 @@ export default class I18nPlugin extends Phaser.Plugins.ScenePlugin {
     this.off('languageChanged', this.languageChangedBound);
     const eventEmitter: Phaser.Events.EventEmitter = this.systems.events;
     eventEmitter.off('shutdown', this.shutdown, this, false);
-    eventEmitter.off('destroy', this.destroy, this, false);
-  }
-
-  private destroy(): void {
-    this.shutdown();
+    eventEmitter.off('shutdown', this.shutdown, this, false);
     this.scene = null;
   }
 

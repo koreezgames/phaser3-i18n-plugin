@@ -11,6 +11,9 @@ const text: any = {
   set(value: string): void {
     if (value !== this._i18nKey) {
       this._i18nKey = value.toString() || '';
+      if (this._i18nKey) {
+        this.i18nUpdate();
+      }
     }
   },
 };
