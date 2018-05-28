@@ -1,15 +1,15 @@
 # Phaser3 i18n Plugin
 
-[![Build Status](https://travis-ci.org/koreezgames/phaser3-i18n-plugin.svg?branch=master)](https://travis-ci.org/koreezgames/phaser3-i18n-plugin) [![David](https://david-dm.org/koreezgames/phaser3-i18n-plugin.svg)]() [![Project status](https://img.shields.io/badge/status-active-brightgreen.svg)](#status)
+[![David](https://david-dm.org/koreezgames/phaser3-i18n-plugin.svg)]() [![Project status](https://img.shields.io/badge/status-active-brightgreen.svg)](#status)
 
 Phaser3 i18n is a plugin for Phaser 3 that allows you to have seamless translations in your game. It uses **[i18next](https://github.com/i18next/i18next)** as it's source for translations management, which is widely adopted by the JS community in other projects as well.
 
 Key features:
 
-* Support for translations namespaces
-* Simple key/value JSON
-* Seamless switching of languages
-* No extra function calls for translating strings, directly build into Phaser's Text object
+- Support for translations namespaces
+- Simple key/value JSON
+- Seamless switching of languages
+- No extra function calls for translating strings, directly build into Phaser's Text object
 
 ## Getting Started
 
