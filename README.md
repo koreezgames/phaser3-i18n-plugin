@@ -80,7 +80,7 @@ Afther plugin has beeen loaded you need to initialize it.
 
 ```javascript
 create () {
-  this.i18n.init(
+  this.i18n.initialize(
     {
       fallbackLng: 'en',
       loadPath: 'assets/i18n/{{lng}}/{{ns}}.json',
