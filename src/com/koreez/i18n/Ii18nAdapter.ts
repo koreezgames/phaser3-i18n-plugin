@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 
-export default interface Ii18nDelegate {
+export default interface Ii18nAdapter {
   /**
    * Is set to the current detected or set language.
    * If you need the primary used language depending on your configuration (whilelist, load) you will prefer using i18next.languages[0].

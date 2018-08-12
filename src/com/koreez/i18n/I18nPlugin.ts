@@ -1,10 +1,10 @@
 import i18next from 'i18next';
 import XHR from 'i18next-xhr-backend';
-import Ii18nDelegate from './Ii18nDelegate';
+import Ii18nAdapter from './Ii18nAdapter';
 import textExtensions from './textExtensions';
 
 export default class I18nPlugin extends Phaser.Plugins.ScenePlugin
-  implements Ii18nDelegate {
+  implements Ii18nAdapter {
   public static staticConstructor(): any {
     textExtensions.extendText();
 
