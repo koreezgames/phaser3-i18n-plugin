@@ -1,20 +1,16 @@
-import i18next, { i18n } from 'i18next';
+import i18next from 'i18next';
 import XHR from 'i18next-xhr-backend';
-import I18n from './i18n';
-import i18nText from './i18nText';
+import Ii18nDelegate from './Ii18nDelegate';
+import textExtensions from './textExtensions';
 
 export default class I18nPlugin extends Phaser.Plugins.ScenePlugin
-  implements I18n {
-  public static i18next: i18n;
-
+  implements Ii18nDelegate {
   public static staticConstructor(): any {
-    I18nPlugin.i18next = i18next;
+    textExtensions.extendText();
 
-    i18nText.extendText();
+    textExtensions.extendBitmapText();
 
-    i18nText.extendBitmapText();
-
-    i18nText.extendDynamicBitmapText();
+    textExtensions.extendDynamicBitmapText();
   }
 
   private languageChangedBound: any;

@@ -44,7 +44,7 @@ const interpolations: any = {
   },
 };
 
-const setTranslationParamameter: (key: string, value: any) => void = function(
+const setTranslationParameter: (key: string, value: any) => void = function(
   key: string,
   value: any,
 ): void {
@@ -55,7 +55,7 @@ const setTranslationParamameter: (key: string, value: any) => void = function(
   this.i18nUpdate();
 };
 
-const clearTranslationParamameter: (key: string) => void = function(
+const clearTranslationParameter: (key: string) => void = function(
   key: string,
 ): void {
   if (key in this._interpolations) {
@@ -76,9 +76,9 @@ const commonExtend: (clazz: any, prop: string) => void = (
 
   clazz.prototype['i18nUpdate'] = i18nUpdate;
 
-  clazz.prototype['setTranslationParamameter'] = setTranslationParamameter;
+  clazz.prototype['setTranslationParameter'] = setTranslationParameter;
 
-  clazz.prototype['clearTranslationParamameter'] = clearTranslationParamameter;
+  clazz.prototype['clearTranslationParameter'] = clearTranslationParameter;
 
   const textCreator: string = creator.prototype[prop];
   delete creator.prototype[prop];
@@ -104,19 +104,19 @@ const i18nText: any = {
     commonExtend(Phaser.GameObjects.Text, 'text');
 
     (Phaser.GameObjects.GameObjectFactory as any).register('text', function(
-      _x: any,
-      _y: any,
-      _text: any,
-      _style: any,
-      _interpolations: any,
+      x: any,
+      y: any,
+      str: any,
+      style: any,
+      theInterpolations: any,
     ): Phaser.GameObjects.GameObject {
       const aText: Phaser.GameObjects.GameObject = this.scene.add._text(
-        _x,
-        _y,
-        _text,
-        _style,
+        x,
+        y,
+        str,
+        style,
       );
-      (aText as any).interpolations = _interpolations;
+      (aText as any).interpolations = theInterpolations;
       return aText;
     });
   },
@@ -127,21 +127,21 @@ const i18nText: any = {
     (Phaser.GameObjects.GameObjectFactory as any).register(
       'bitmapText',
       function(
-        _x: any,
-        _y: any,
-        _font: any,
-        _text: any,
-        _size: any,
-        _interpolations: any,
+        x: any,
+        y: any,
+        font: any,
+        str: any,
+        size: any,
+        theInterpolations: any,
       ): Phaser.GameObjects.GameObject {
         const aText: Phaser.GameObjects.GameObject = this.scene.add._bitmapText(
-          _x,
-          _y,
-          _font,
-          _text,
-          _size,
+          x,
+          y,
+          font,
+          str,
+          size,
         );
-        (aText as any).interpolations = _interpolations;
+        (aText as any).interpolations = theInterpolations;
         return aText;
       },
     );
@@ -153,21 +153,21 @@ const i18nText: any = {
     (Phaser.GameObjects.GameObjectFactory as any).register(
       'dynamicBitmapText',
       function(
-        _x: any,
-        _y: any,
-        _font: any,
-        _text: any,
-        _size: any,
-        _interpolations: any,
+        x: any,
+        y: any,
+        font: any,
+        str: any,
+        size: any,
+        theInterpolations: any,
       ): Phaser.GameObjects.GameObject {
         const aText: Phaser.GameObjects.GameObject = this.scene.add._dynamicBitmapText(
-          _x,
-          _y,
-          _font,
-          _text,
-          _size,
+          x,
+          y,
+          font,
+          str,
+          size,
         );
-        (aText as any).interpolations = _interpolations;
+        (aText as any).interpolations = theInterpolations;
         return aText;
       },
     );

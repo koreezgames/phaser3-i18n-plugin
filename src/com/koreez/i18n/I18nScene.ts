@@ -1,5 +1,5 @@
-import I18n from './i18n';
+import Ii18nDelegate from './Ii18nDelegate';
 
 export default interface I18nScene extends Phaser.Scene {
-  i18n: I18n;
+  i18n: Ii18nDelegate;
 }
