@@ -33,7 +33,7 @@ $ npm i --save  @koreez/phaser3-i18n
 ### Import the plugin
 
 ```javascript
-import I18nPlugin from "@koreez/phaser3-i18n";
+import { I18nPlugin } from "@koreez/phaser3-i18n";
 ```
 
 ### Load the plugin
