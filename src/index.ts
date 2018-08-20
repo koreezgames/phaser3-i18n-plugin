@@ -1,6 +1,15 @@
-import I18nPlugin from './com/koreez/i18n/I18nPlugin';
+// ------------------------------------------------------------------------------
+//  Copyright (c) 2018 Koreez LLC. All Rights Reserved.
+//
+//  NOTICE: You are permitted to use, modify, and distribute this file
+//  in accordance with the terms of the license agreement accompanying it.
+// ------------------------------------------------------------------------------
 
-export { default as I18nScene } from './com/koreez/i18n/I18nScene';
-export { default as Ii18nAdapter } from './com/koreez/i18n/Ii18nAdapter';
+/**
+ * I18nPlugin
+ */
+export { I18nPlugin } from "./com/koreez/plugin/I18nPlugin";
 
-export default I18nPlugin;
+export { I18nScene } from "./com/koreez/plugin/i18n/I18nScene";
+
+export { Ii18nAdapter } from "./com/koreez/plugin/i18n/Ii18nAdapter";

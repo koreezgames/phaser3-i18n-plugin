@@ -1,29 +1,25 @@
 # Phaser3 i18n Plugin
 
-[![David](https://david-dm.org/koreezgames/phaser3-i18n-plugin.svg)]() [![Project status](https://img.shields.io/badge/status-active-brightgreen.svg)](#status)
+[![GitHub license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobotlegsJS/RobotlegsJS/blob/master/LICENSE)
+[![Build Status](https://secure.travis-ci.org/koreezgames/phaser3-i18n-plugin.svg?branch=master)](https://travis-ci.org/koreezgames/phaser3-i18n-plugin)
+[![codebeat badge](https://codebeat.co/badges/e3792494-1875-4826-be00-2124148b9287)](https://codebeat.co/projects/github-com-koreezgames-phaser3-i18n-plugin-master)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/63e0c72189fa97ca55db/test_coverage)](https://codeclimate.com/github/koreezgames/phaser3-i18n-plugin/test_coverage)
+[![npm version](https://badge.fury.io/js/%40koreez%2Fphaser3-i18n.svg)](https://badge.fury.io/js/%40koreez%2Fphaser3-i18n)
+[![Greenkeeper badge](https://badges.greenkeeper.io/koreezgames/phaser3-i18n-plugin.svg)](https://greenkeeper.io/)
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 Phaser3 i18n is a plugin for Phaser 3 that allows you to have seamless translations in your game. It uses **[i18next](https://github.com/i18next/i18next)** as it's source for translations management, which is widely adopted by the JS community in other projects as well.
 
 Key features:
 
-- Support for translations namespaces
-- Simple key/value JSON
-- Seamless switching of languages
-- No extra function calls for translating strings, directly build into Phaser's Text object
+-   Support for translations namespaces
+-   Simple key/value JSON
+-   Seamless switching of languages
+-   No extra function calls for translating strings, directly build into Phaser's Text object
 
 ## Getting Started
 
 ### Installation
-
-#### **_Using script tag:_**
-
-[![](https://data.jsdelivr.com/v1/package/npm/@koreez/phaser3-i18n/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@koreez/phaser3-i18n/lib/index.js)
-
-```html
-<script src="//cdn.jsdelivr.net/npm/@koreez/phaser3-i18n/lib/index.js"></script>
-```
-
-#### **_Using npm:_**
 
 [![npm](https://img.shields.io/npm/dt/@koreez/phaser3-i18n.svg)](https://www.npmjs.com/package/@koreez/phaser3-i18n)
 
@@ -36,16 +32,8 @@ $ npm i --save  @koreez/phaser3-i18n
 
 ### Import the plugin
 
-##### **_CommonJS_**
-
 ```javascript
-var I18nPlugin = require('@koreez/phaser3-i18n');
-```
-
-##### **_ES2015_**
-
-```javascript
-import I18nPlugin from '@koreez/phaser3-i18n';
+import I18nPlugin from "@koreez/phaser3-i18n";
 ```
 
 ### Load the plugin
@@ -55,22 +43,22 @@ So, to load the plugin, include it in plugins config.
 
 ```javascript
 const config = {
-  type: Phaser.AUTO,
-  parent: 'phaser-example',
-  width: 800,
-  height: 600,
-  plugins: {
-    scene: [
-      {
-        key: 'i18nPlugin',
-        plugin: I18nPlugin,
-        mapping: 'i18n',
-      },
-    ],
-  },
-  scene: {
-    create: create,
-  },
+    type: Phaser.AUTO,
+    parent: "phaser-example",
+    width: 800,
+    height: 600,
+    plugins: {
+        scene: [
+            {
+                key: "i18nPlugin",
+                plugin: I18nPlugin,
+                mapping: "i18n"
+            }
+        ]
+    },
+    scene: {
+        create: create
+    }
 };
 ```
 
@@ -111,12 +99,22 @@ this.add.bitmapText(x, y, font, text, size, interpolations);
 
 ```javascript
 var config = {
-  x: 100,
-  y: 100,
-  text: 'translationKey',
-  font: 'atari-classic',
-  size: 64,
-  interpolations: { 0: 'value0', 1: 'value1' },
+    x: 100,
+    y: 100,
+    text: "translationKey",
+    font: "atari-classic",
+    size: 64,
+    interpolations: { 0: "value0", 1: "value1" }
 };
 this.make.dynamicBitmapText(config);
 ```
+
+## Credits
+
+Big thanks to this great repo:
+
+https://github.com/orange-games/phaser-i18next
+
+## License
+
+[MIT](LICENSE)

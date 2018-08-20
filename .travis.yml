@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - stable
+env:
+  global:
+    - CC_TEST_REPORTER_ID=71e455189fdcb3925ba38e620c090f72e7734ab75219b2a39fbaaad0021daab7
+before_install:
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - yarn config set registry "https://registry.npmjs.org"
+  - yarn global add greenkeeper-lockfile@1
+  - yarn global add codeclimate-test-reporter
+before_script:
+  - greenkeeper-lockfile-update
+script:
+  - yarn test
+after_script:
+  - greenkeeper-lockfile-upload
+after_success:
+  - codeclimate-test-reporter < coverage/lcov.info
