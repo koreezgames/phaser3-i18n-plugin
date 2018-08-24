@@ -64,7 +64,7 @@ const config = {
 
 ### Initialize the plugin
 
-Afther plugin has beeen loaded you need to initialize it.
+After plugin has been loaded you need to initialize it.
 
 ```javascript
 create () {
@@ -91,7 +91,7 @@ The plugin will patch _add.text, add.bitmapText and add.dynamicBitmapText / make
 // font - bitmap font
 // text - should be translation key
 // size - font size
-// interpolations - interpolation for transleation (for example { 0: "value0", 1: "value1" }), note this is not required parametr
+// interpolations - interpolation for translation (for example { 0: "value0", 1: "value1" }), note this is not required parameter
 this.add.bitmapText(x, y, font, text, size, interpolations);
 ```
 
@@ -108,6 +108,14 @@ var config = {
 };
 this.make.dynamicBitmapText(config);
 ```
+
+## Manage translations
+
+When you're all done and set up for translations and have your key value file, next up is starting to translate them. For smaller games this is fairly simple and still manageable by editing your translations in a text file.
+But when you start with bigger games and more translations (and translation namespaces) you want to manage your translations better, and maybe even use external translator services.
+
+Two of those service you could use are [locize](https://locize.com/) and/or [Poeditor](https://poeditor.com). Both these services allow you to online edit key value JSON translations that are used in i18next.
+The advantage of using such tools is that it's easier to allow external people work on your translations and they aggregate the statistics of your projects (translation completion, languages managed, etc.)
 
 ## Credits
 
