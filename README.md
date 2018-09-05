@@ -1,6 +1,6 @@
 # Phaser3 i18n Plugin
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobotlegsJS/RobotlegsJS/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/koreezgames/phaser3-i18n-plugin/blob/master/LICENSE)
 [![Build Status](https://secure.travis-ci.org/koreezgames/phaser3-i18n-plugin.svg?branch=master)](https://travis-ci.org/koreezgames/phaser3-i18n-plugin)
 [![codebeat badge](https://codebeat.co/badges/753f25dc-b8b8-4b55-9559-2bdc00b070e1)](https://codebeat.co/projects/github-com-koreezgames-phaser-i18next-master)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/63e0c72189fa97ca55db/test_coverage)](https://codeclimate.com/github/koreezgames/phaser3-i18n-plugin/test_coverage)
