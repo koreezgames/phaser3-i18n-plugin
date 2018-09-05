@@ -232,7 +232,7 @@ export class I18nPlugin extends Phaser.Plugins.ScenePlugin implements Ii18nAdapt
             obj instanceof Phaser.GameObjects.BitmapText ||
             obj instanceof Phaser.GameObjects.DynamicBitmapText
         ) {
-            (obj as any).i18nUpdate();
+            (obj as any).setText((obj as any)._i18nKey);
             return;
         }
         if (obj instanceof Phaser.GameObjects.Container) {

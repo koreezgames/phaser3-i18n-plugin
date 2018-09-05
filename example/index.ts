@@ -24,8 +24,9 @@ function create() {
             loadPath: "assets/i18n/{{lng}}/{{ns}}.json"
         },
         () => {
-            this.add.text(0, 0, "hello");
+            this.make.text({ x: 0, y: 0, text: "hello" }, true);
             this.add.text(60, 0, "world");
+            this.add.text(60, 60, "interpolations", null, { 0: "is working" });
             setTimeout(() => {
                 this.i18n.changeLanguage("es");
             }, 5000);

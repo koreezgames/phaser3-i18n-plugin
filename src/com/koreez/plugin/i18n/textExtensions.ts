@@ -1,33 +1,12 @@
 import * as i18next from "i18next";
 
-const text: any = {
-    get(): any {
-        if (!this.dirty) {
-            this._i18nText = i18next.t(this._i18nKey, this._interpolations) || "";
-        }
-        return this._i18nText;
-    },
-
-    set(value: string): void {
-        if (value !== this._i18nKey) {
-            this._i18nKey = value.toString() || "";
-            if (this._i18nKey) {
-                this.i18nUpdate();
-            }
-        }
+const setText: (value: string) => any = function(value: string): any {
+    console.log("value :", value);
+    if (value !== this._i18nKey) {
+        this._i18nKey = value.toString() || "";
     }
-};
-
-const i18nUpdate: () => void = function(): void {
-    if (this instanceof Phaser.GameObjects.Text) {
-        this.dirty = false;
-        this.updateText();
-    } else if (this instanceof Phaser.GameObjects.BitmapText || this instanceof Phaser.GameObjects.DynamicBitmapText) {
-        this.dirty = false;
-        // tslint:disable-next-line
-        this.text;
-        this.dirty = true;
-    }
+    this._i18nText = i18next.t(this._i18nKey, this._interpolations) || "";
+    return this._setText(this._i18nText);
 };
 
 const interpolations: any = {
@@ -37,7 +16,7 @@ const interpolations: any = {
 
     set(value: any): void {
         this._interpolations = value;
-        this.i18nUpdate();
+        this.setText(this._i18nKey);
     }
 };
 
@@ -46,23 +25,26 @@ const setTranslationParameter: (key: string, value: any) => void = function(key:
         this._interpolations = {};
     }
     this._interpolations[key] = value;
-    this.i18nUpdate();
+    this.setText(this._i18nKey);
 };
 
 const clearTranslationParameter: (key: string) => void = function(key: string): void {
     if (key in this._interpolations) {
         delete this._interpolations[key];
     }
-    this.i18nUpdate();
+    this.setText(this._i18nKey);
 };
 
 const commonExtend: (clazz: any, prop: string) => void = (clazz: any, prop: string): void => {
     const creator: any = Phaser.GameObjects.GameObjectCreator;
 
-    Object.defineProperty(clazz.prototype, "text", text);
+    const factory: any = Phaser.GameObjects.GameObjectFactory;
+
+    clazz.prototype._setText = clazz.prototype.setText;
+
+    clazz.prototype.setText = setText;
 
     Object.defineProperty(clazz.prototype, "interpolations", interpolations);
-    clazz.prototype.i18nUpdate = i18nUpdate;
 
     clazz.prototype.setTranslationParameter = setTranslationParameter;
 
@@ -71,14 +53,15 @@ const commonExtend: (clazz: any, prop: string) => void = (clazz: any, prop: stri
     const textCreator: string = creator.prototype[prop];
     delete creator.prototype[prop];
 
-    const textFactory: any = creator.prototype[prop];
-    delete creator.prototype[prop];
+    const textFactory: string = factory.prototype[prop];
+    delete factory.prototype[prop];
 
     creator.register(`_${prop}`, textCreator);
-    creator.register(`_${prop}`, textFactory);
 
-    creator.register(prop, function(config: any): Phaser.GameObjects.GameObject {
-        const _text: Phaser.GameObjects.GameObject = this.scene.make[`_${prop}`](config);
+    factory.register(`_${prop}`, textFactory);
+
+    creator.register(prop, function(config: any, addToScene: boolean = false): Phaser.GameObjects.GameObject {
+        const _text: Phaser.GameObjects.GameObject = this.scene.make[`_${prop}`](config, addToScene);
         (_text as any).interpolations = config.interpolations;
         return _text;
     });
