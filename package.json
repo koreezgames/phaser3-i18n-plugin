@@ -52,7 +52,7 @@
         "i18next-xhr-backend": "^1.5.1"
     },
     "peerDependencies": {
-        "phaser": "^3.12.0-beta2"
+        "phaser": "^3.12.0"
     },
     "devDependencies": {
         "@types/bluebird": "^3.5.24",
