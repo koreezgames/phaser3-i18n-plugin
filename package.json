@@ -1,6 +1,6 @@
 {
     "name": "@koreez/phaser3-i18n",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "description": "Internationalization for phaser done right. Using the i18next i18n ecosystem.",
     "main": "lib/index.js",
     "typings": "lib/index.d.ts",
