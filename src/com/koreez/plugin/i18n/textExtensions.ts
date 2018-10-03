@@ -71,7 +71,10 @@ const commonExtend: (clazz: any, prop: string) => void = (clazz: any, prop: stri
 
 const textExtensions: any = {
     extendText: () => {
-        commonExtend(Phaser.GameObjects.Text, "text");
+        const text: any = Phaser.GameObjects.Text;
+        if (text) {
+            commonExtend(text, "text");
+        }
         const gameObjectFactory: any = Phaser.GameObjects.GameObjectFactory;
         if (!gameObjectFactory) {
             return;
@@ -90,7 +93,10 @@ const textExtensions: any = {
     },
 
     extendBitmapText: () => {
-        commonExtend(Phaser.GameObjects.BitmapText, "bitmapText");
+        const bitmapText: any = Phaser.GameObjects.BitmapText;
+        if (bitmapText) {
+            commonExtend(bitmapText, "bitmapText");
+        }
         const gameObjectFactory: any = Phaser.GameObjects.GameObjectFactory;
         if (!gameObjectFactory) {
             return;
@@ -110,7 +116,10 @@ const textExtensions: any = {
     },
 
     extendDynamicBitmapText: () => {
-        commonExtend(Phaser.GameObjects.DynamicBitmapText, "dynamicBitmapText");
+        const dynamicBitmapText: any = Phaser.GameObjects.DynamicBitmapText;
+        if (dynamicBitmapText) {
+            commonExtend(dynamicBitmapText, "dynamicBitmapText");
+        }
         const gameObjectFactory: any = Phaser.GameObjects.GameObjectFactory;
         if (!gameObjectFactory) {
             return;
