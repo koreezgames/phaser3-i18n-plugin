@@ -1,7 +1,6 @@
 import * as i18next from "i18next";
 
 const setText: (value: string) => any = function(value: string): any {
-    console.log("value :", value);
     if (value !== this._i18nKey) {
         this._i18nKey = value.toString() || "";
     }
@@ -36,10 +35,6 @@ const clearTranslationParameter: (key: string) => void = function(key: string): 
 };
 
 const commonExtend: (clazz: any, prop: string) => void = (clazz: any, prop: string): void => {
-    const creator: any = Phaser.GameObjects.GameObjectCreator;
-
-    const factory: any = Phaser.GameObjects.GameObjectFactory;
-
     clazz.prototype._setText = clazz.prototype.setText;
 
     clazz.prototype.setText = setText;
@@ -50,28 +45,38 @@ const commonExtend: (clazz: any, prop: string) => void = (clazz: any, prop: stri
 
     clazz.prototype.clearTranslationParameter = clearTranslationParameter;
 
-    const textCreator: string = creator.prototype[prop];
-    delete creator.prototype[prop];
+    const creator: any = Phaser.GameObjects.GameObjectCreator;
+    if (creator) {
+        const textCreator: string = creator.prototype[prop];
+        if (textCreator) {
+            delete creator.prototype[prop];
+            creator.register(`_${prop}`, textCreator);
+            creator.register(prop, function(config: any, addToScene: boolean = false): Phaser.GameObjects.GameObject {
+                const _text: Phaser.GameObjects.GameObject = this.scene.make[`_${prop}`](config, addToScene);
+                (_text as any).interpolations = config.interpolations;
+                return _text;
+            });
+        }
+    }
 
-    const textFactory: string = factory.prototype[prop];
-    delete factory.prototype[prop];
-
-    creator.register(`_${prop}`, textCreator);
-
-    factory.register(`_${prop}`, textFactory);
-
-    creator.register(prop, function(config: any, addToScene: boolean = false): Phaser.GameObjects.GameObject {
-        const _text: Phaser.GameObjects.GameObject = this.scene.make[`_${prop}`](config, addToScene);
-        (_text as any).interpolations = config.interpolations;
-        return _text;
-    });
+    const factory: any = Phaser.GameObjects.GameObjectFactory;
+    if (factory) {
+        const textFactory: string = factory.prototype[prop];
+        if (textFactory) {
+            delete factory.prototype[prop];
+            factory.register(`_${prop}`, textFactory);
+        }
+    }
 };
 
 const textExtensions: any = {
     extendText: () => {
         commonExtend(Phaser.GameObjects.Text, "text");
-
-        (Phaser.GameObjects.GameObjectFactory as any).register("text", function(
+        const gameObjectFactory: any = Phaser.GameObjects.GameObjectFactory;
+        if (!gameObjectFactory) {
+            return;
+        }
+        gameObjectFactory.register("text", function(
             x: any,
             y: any,
             str: any,
@@ -86,8 +91,11 @@ const textExtensions: any = {
 
     extendBitmapText: () => {
         commonExtend(Phaser.GameObjects.BitmapText, "bitmapText");
-
-        (Phaser.GameObjects.GameObjectFactory as any).register("bitmapText", function(
+        const gameObjectFactory: any = Phaser.GameObjects.GameObjectFactory;
+        if (!gameObjectFactory) {
+            return;
+        }
+        gameObjectFactory.register("bitmapText", function(
             x: any,
             y: any,
             font: any,
@@ -103,8 +111,11 @@ const textExtensions: any = {
 
     extendDynamicBitmapText: () => {
         commonExtend(Phaser.GameObjects.DynamicBitmapText, "dynamicBitmapText");
-
-        (Phaser.GameObjects.GameObjectFactory as any).register("dynamicBitmapText", function(
+        const gameObjectFactory: any = Phaser.GameObjects.GameObjectFactory;
+        if (!gameObjectFactory) {
+            return;
+        }
+        gameObjectFactory.register("dynamicBitmapText", function(
             x: any,
             y: any,
             font: any,
