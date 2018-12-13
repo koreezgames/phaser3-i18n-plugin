@@ -1,7 +1,7 @@
-# Phaser3 Nine Patch Changelog:
+# Phaser3 i18n Plugin:
 
-## Phaser3 Nine Patch 1.1.1
+## Phaser3 Nine Patch 2.0.5
 
-### v1.1.1 - Planned stable version
+### v2.0.5
 
--   fixed resize method to be chainable
+-   added i18next export
