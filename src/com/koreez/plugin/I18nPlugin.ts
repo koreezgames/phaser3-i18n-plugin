@@ -1,9 +1,9 @@
 import i18next from "i18next";
 import * as XHR from "i18next-xhr-backend";
+import { Ii18n } from "./i18n/Ii18n";
 import textExtensions from "./i18n/textExtensions";
 
-// @ts-ignore
-export class I18nPlugin extends Phaser.Plugins.ScenePlugin implements i18next.i18n {
+export class I18nPlugin extends Phaser.Plugins.ScenePlugin implements Ii18n {
     public static staticConstructor(): any {
         textExtensions.extendText();
 
