@@ -8,9 +8,7 @@
 /**
  * I18nPlugin
  */
+import i18next from "i18next";
 export { I18nScene } from "./com/koreez/plugin/i18n/I18nScene";
-export { Ii18nAdapter } from "./com/koreez/plugin/i18n/Ii18nAdapter";
 export { I18nPlugin } from "./com/koreez/plugin/I18nPlugin";
-
-import i18next = require("i18next");
 export { i18next };

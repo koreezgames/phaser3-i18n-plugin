@@ -48,7 +48,7 @@
     },
     "homepage": "https://github.com/koreezgames/phaser3-i18n-plugin#readme",
     "dependencies": {
-        "i18next": "^12.1.0",
+        "i18next": "^14.0.1",
         "i18next-xhr-backend": "^1.5.1"
     },
     "peerDependencies": {

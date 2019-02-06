@@ -1,4 +1,4 @@
-import * as i18next from "i18next";
+import i18next from "i18next";
 
 const setText: (value: string) => any = function(value: string): any {
     if (value !== this._i18nKey) {

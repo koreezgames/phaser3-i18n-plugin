@@ -1,5 +1,5 @@
-import { Ii18nAdapter } from "./Ii18nAdapter";
+import { I18nPlugin } from "../I18nPlugin";
 
 export interface I18nScene extends Phaser.Scene {
-    i18n: Ii18nAdapter;
+    i18n: I18nPlugin;
 }

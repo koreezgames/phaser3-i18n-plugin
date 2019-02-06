@@ -1,5 +1,3 @@
-/// <reference path="../definitions/phaser.d.ts" />
-
 import "phaser";
 import { i18next } from "../src";
 import { I18nPlugin } from "../src/com/koreez/plugin/I18nPlugin";

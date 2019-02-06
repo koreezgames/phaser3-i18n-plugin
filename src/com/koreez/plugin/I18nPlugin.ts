@@ -1,15 +1,23 @@
-import * as i18next from "i18next";
+import i18next from "i18next";
 import * as XHR from "i18next-xhr-backend";
-import { Ii18nAdapter } from "./i18n/Ii18nAdapter";
 import textExtensions from "./i18n/textExtensions";
 
-export class I18nPlugin extends Phaser.Plugins.ScenePlugin implements Ii18nAdapter {
+// @ts-ignore
+export class I18nPlugin extends Phaser.Plugins.ScenePlugin implements i18next.i18n {
     public static staticConstructor(): any {
         textExtensions.extendText();
 
         textExtensions.extendBitmapText();
 
         textExtensions.extendDynamicBitmapText();
+    }
+
+    public get modules(): i18next.Modules {
+        return i18next.modules;
+    }
+
+    public get services(): i18next.Services {
+        return i18next.services;
     }
 
     private languageChangedBound: any;
@@ -49,12 +57,28 @@ export class I18nPlugin extends Phaser.Plugins.ScenePlugin implements Ii18nAdapt
         return i18next.use(module);
     }
 
-    public t(key: string | string[], options: i18next.TranslationOptions<object>): any {
+    public t<
+        TResult extends string | object | Array<string | object> | undefined = string,
+        TKeys extends string = string,
+        TValues extends object = object
+    >(key: TKeys | TKeys[], options?: i18next.TOptions<TValues>): TResult {
         return i18next.t(key, options);
     }
 
-    public exists(key: string | string[], options?: i18next.TranslationOptions<object>): boolean {
+    public exists(key: string | string[], options?: i18next.InterpolationOptions): boolean {
         return i18next.exists(key, options);
+    }
+
+    public loadResources(callback?: (err: any) => void): void {
+        i18next.loadResources(callback);
+    }
+
+    public createInstance(options?: i18next.InitOptions, callback?: i18next.Callback): i18next.i18n {
+        return i18next.createInstance(options, callback);
+    }
+
+    public cloneInstance(options?: i18next.InitOptions, callback?: i18next.Callback): i18next.i18n {
+        return i18next.cloneInstance(options, callback);
     }
 
     /**
@@ -62,7 +86,7 @@ export class I18nPlugin extends Phaser.Plugins.ScenePlugin implements Ii18nAdapt
      * Both params could be arrays of languages or namespaces and will be treated as fallbacks in that case.
      * On the returned function you can like in the t function override the languages or namespaces by passing them in options or by prepending namespace.
      */
-    public getFixedT(lng: string | string[], ns?: string | string[]): i18next.TranslationFunction<any, object, string> {
+    public getFixedT(lng: string | string[], ns?: string | string[]): i18next.TFunction {
         return i18next.getFixedT(lng, ns);
     }
 
@@ -70,8 +94,8 @@ export class I18nPlugin extends Phaser.Plugins.ScenePlugin implements Ii18nAdapt
      * Changes the language. The callback will be called as soon translations were loaded or an error occurs while loading.
      * HINT: For easy testing - setting lng to 'cimode' will set t function to always return the key.
      */
-    public changeLanguage(lng: string, callback?: i18next.Callback): void {
-        i18next.changeLanguage(lng, callback);
+    public changeLanguage(lng: string, callback?: i18next.Callback): Promise<i18next.TFunction> {
+        return i18next.changeLanguage(lng, callback);
     }
 
     /**
@@ -92,22 +116,22 @@ export class I18nPlugin extends Phaser.Plugins.ScenePlugin implements Ii18nAdapt
     /**
      * Loads additional namespaces not defined in init options.
      */
-    public loadNamespaces(ns: string | string[], callback: i18next.Callback): void {
-        i18next.loadNamespaces(ns, callback);
+    public loadNamespaces(ns: string | string[], callback: i18next.Callback): Promise<void> {
+        return i18next.loadNamespaces(ns, callback);
     }
 
     /**
      * Loads additional languages not defined in init options (preload).
      */
-    public loadLanguages(lngs: string | string[], callback: i18next.Callback): void {
-        i18next.loadLanguages(lngs, callback);
+    public loadLanguages(lngs: string | string[], callback: i18next.Callback): Promise<void> {
+        return i18next.loadLanguages(lngs, callback);
     }
 
     /**
      * Reloads resources on given state. Optionally you can pass an array of languages and namespaces as params if you don't want to reload all.
      */
-    public reloadResources(lngs?: string[], ns?: string[]): void {
-        i18next.reloadResources(lngs, ns);
+    public reloadResources(lngs?: string[], ns?: string[]): Promise<void> {
+        return i18next.reloadResources(lngs, ns);
     }
 
     /**
@@ -134,8 +158,8 @@ export class I18nPlugin extends Phaser.Plugins.ScenePlugin implements Ii18nAdapt
     /**
      * Event listener
      */
-    public on(event: string, callback: (options: i18next.InitOptions) => void): void {
-        i18next.on(event, callback);
+    public on(event: string, listener: (...args: any[]) => void): void {
+        i18next.on(event, listener);
     }
 
     /**
