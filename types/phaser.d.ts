@@ -77677,3 +77677,10 @@ declare module 'phaser' {
     export = Phaser;
 
 }
+
+interface ActiveXObject {
+  new(s: string): any;
+}
+
+declare var ActiveXObject: ActiveXObject;
+
