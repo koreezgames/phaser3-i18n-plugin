@@ -1,6 +1,6 @@
 # Phaser3 i18n Plugin:
 
-## Phaser3 Nine Patch 2.0.5
+## Phaser3 i18n Plugin 2.0.6
 
 ### v2.0.6
 
