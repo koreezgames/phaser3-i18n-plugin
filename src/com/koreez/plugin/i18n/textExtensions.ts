@@ -4,8 +4,7 @@ const setText: (value: string) => any = function(value: string): any {
     if (value !== this._i18nKey) {
         this._i18nKey = value.toString() || "";
     }
-    this._i18nText = i18next.t(this._i18nKey, this._interpolations) || "";
-    return this._setText(this._i18nText);
+    return this._setText(i18next.t(this._i18nKey, this._interpolations) || "");
 };
 
 const interpolations: any = {
@@ -35,15 +34,17 @@ const clearTranslationParameter: (key: string) => void = function(key: string): 
 };
 
 const commonExtend: (clazz: any, prop: string) => void = (clazz: any, prop: string): void => {
-    clazz.prototype._setText = clazz.prototype.setText;
+    if (clazz.prototype.setText !== setText) {
+        clazz.prototype._setText = clazz.prototype.setText;
 
-    clazz.prototype.setText = setText;
+        clazz.prototype.setText = setText;
 
-    Object.defineProperty(clazz.prototype, "interpolations", interpolations);
+        Object.defineProperty(clazz.prototype, "interpolations", interpolations);
 
-    clazz.prototype.setTranslationParameter = setTranslationParameter;
+        clazz.prototype.setTranslationParameter = setTranslationParameter;
 
-    clazz.prototype.clearTranslationParameter = clearTranslationParameter;
+        clazz.prototype.clearTranslationParameter = clearTranslationParameter;
+    }
 
     const creator: any = Phaser.GameObjects.GameObjectCreator;
     if (creator) {

@@ -1,5 +1,5 @@
+/// <reference path="../types/phaser.d.ts" />
 import "phaser";
-import { i18next } from "../src";
 import { I18nPlugin } from "../src/com/koreez/plugin/I18nPlugin";
 
 export default class Game extends Phaser.Game {
@@ -11,7 +11,8 @@ export default class Game extends Phaser.Game {
 }
 
 function preload() {
-    console.log("preload");
+  this.load.bitmapFont("helvetica_regular", "assets/bitmapfonts/helvetica_regular.png", "assets/bitmapfonts/helvetica_regular.xml");
+  this.load.bitmapFont("iceicebaby", "assets/bitmapfonts/iceicebaby.png", "assets/bitmapfonts/iceicebaby.xml");
 }
 
 function create() {
@@ -23,15 +24,13 @@ function create() {
             loadPath: "assets/i18n/{{lng}}/{{ns}}.json"
         },
         () => {
-            console.log(i18next.t("hello"));
             this.make.text({ x: 0, y: 0, text: "hello" }, true);
             this.add.text(60, 0, "world");
             this.add.text(60, 60, "interpolations", null, { 0: "is working" });
+            this.add.bitmapText(100, 100, "helvetica_regular", "hello", 50);
+            this.add.dynamicBitmapText(100, 200, "iceicebaby", "hello", 50);
             setTimeout(() => {
                 this.i18n.changeLanguage("es");
-                setTimeout(() => {
-                    console.log(i18next.t("hello"));
-                }, 2000);
             }, 5000);
         }
     );
@@ -40,7 +39,6 @@ function create() {
 document.onreadystatechange = () => {
     if (document.readyState === "complete") {
         const config = {
-            banner: false,
             height: 600,
             plugins: {
                 scene: [
