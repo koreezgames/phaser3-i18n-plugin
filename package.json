@@ -99,7 +99,7 @@
         "tslint-config-prettier": "^1.18.0",
         "typescript": "^3.3.3",
         "uglifyjs-webpack-plugin": "^2.1.1",
-        "webpack": "^4.29.3",
+        "webpack": "^4.39.3",
         "webpack-cli": "^3.2.3",
         "webpack-concat-plugin": "^3.0.0",
         "webpack-dev-server": "^3.1.14"
