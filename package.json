@@ -61,7 +61,7 @@
         "@types/i18next-xhr-backend": "^1.4.1",
         "@types/mocha": "^5.2.1",
         "@types/sinon": "^7.0.5",
-        "bluebird": "^3.5.3",
+        "bluebird": "^3.7.1",
         "browserify-versionify": "^1.0.6",
         "chai": "^4.2.0",
         "es6-map": "^0.1.5",
